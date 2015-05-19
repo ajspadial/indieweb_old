@@ -1,0 +1,71 @@
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>ajspadial ::: Accesos directos en Windows para Apache</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="icon" href="../../../../../img/ajspadial.jpg">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+	<article class="h-entry">
+        <div class="header">
+          <h1 class="p-name">Accesos directos en Windows para Apache</h1>
+          <img class="picture" src="../../../../../img/ajspadial.jpg"><p>Publicado por <a class="p-author h-card" href="../../../../../../">ajspadial</a> el <a href="#"><time class="dt-published" datetime="2015-05-19">19 de mayo de 2015</time></a></p>
+          <span class="label label-primary p-category">#sysadmin</span>
+          <span class="label label-primary p-category">#windows</span>
+          <span class="label label-primary p-category">#apache</span>
+        </div>
+        <div class="md-col-12 e-content">
+          <p>Separar nuestra carpeta de desarrollo y la carpeta <code>htdocs</code> de <strong>Apache</strong></p>
+          <p>Es algo que hacemos fácilmente en entornos Linux, creando un enlace simbólico desde la carpeta de Apache (normalmente <code>/var/www/</code> o algo semejante) a nuestra carpeta de usuario en <code>/home/</code>.</p> 
+          <p>La primera ocurrencia para hacer algo parecido en <strong>Windows</strong> es crear un <strong>Acceso directo</strong>. Es muy sencillo e intuitivo basta pinchar con el botón derecho, seleccionar la opción correspondiente del menú, y seleccionar el directorio de destino y un nombre para el acceso directo.</p>
+          <p>Sin embargo, al abrir nuestro navegador y apuntar a <em>localhost/accesoDirecto</em> obtenemos un error <strong>TODO</strong>. Apache no encuentra el <code>index.html</code>, de hecho no encuentra nada en el directorio objetivo.</p>
+          <h2>¿Qué está ocurriendo?</h2>
+          <p>Tras sufrir el problema, he descubierto (tal vez redescubierto) que los enlaces directos de Windows no son tales. Son ficheros. Particularmente son ficheros con la extensión <code>.lnk</code>.</p>
+          <p>Así que en realidad, no hay nada en el directorio <code>htdocs</code> que se llame <code>accesoDirecto</code>. Sí hay un fichero llamado <code>accesoDirecto.lnk</code> pero Apache no sabe qué hacer con él, más que intentar servirlo al navegador como una descarga.</p>
+          <h2>¡Y ahora qué hago?</h2>
+          <p>Pues crear un enlace simbólico. Porque <strong>Windows</strong> sí dispone de esta opción, aunque por algún motivo no está disponible en la interfaz gráfica, es necesario usar <strong>la línea de comandos</strong>.</p>
+          <p>Desde la consola usaremos la instrucción <code>mklink</code>. Para ver como funciona la ejecutamos en modo ayuda:</p>
+
+<pre class="code cli-output">
+    C:>mklink /?<br>
+    Crea un vínculo simbólico<br>
+    <br>
+    MKLINK [[/D] | [/H] | [/J]] Vínculo Destino<br>
+    <br>
+   	&Tab;/D&Tab;Crea un vínculo simbólico a un directorio. El valor<br>
+	&Tab;&Tab;predeterminado es un vínculo simbólico a un archivo.<br>
+	&Tab;/H&Tab;Crea un vínculo físico en lugar de un vínculo simbólico.<br>
+	&Tab;/J&Tab;Crea una unión de directorios.<br>
+	&Tab;Vínculo&Tab;Especifica el nombre del nuevo vínculo simbólico.<br>
+	&Tab;Destino&Tab;Especifica la ruta (relativa o absoluta) a la que hace<br>
+	&Tab;&Tab;referencia el nuevo vínculo.<br>
+</pre>
+
+          <p>Con esto todo parece estar bastante claro. Bueno, todo menos la diferencia
+entre las opciones de <strong>vínculo simbólico a directorio</strong>, <strong>vínculo físico</strong> y
+<strong>unión de directorios</strong>. Intentaré aclararlo.</p>
+
+          <h2>Vínculo simbólico vs. vínculo físico</h2>
+
+          <h2> Vínculo simbólico vs. unión de directorios</h2>
+
+          <h2> Referencias</h2>
+          <ul>
+            <li><a href="http://technet.microsoft.com/en-us/library/cc753194.aspx">http://technet.microsoft.com/en-us/library/cc753194.aspx</a>
+            <li><a href="http://msdn.microsoft.com/en-us/library/aa365006%28VS.85%29.aspx">http://msdn.microsoft.com/en-us/library/aa365006%28VS.85%29.aspx</a>
+            <li><a href="http://stackoverflow.com/questions/874913/in-detail-mklink-and-its-options">http://stackoverflow.com/questions/874913/in-detail-mklink-and-its-options</a>
+            <li><a href="http://superuser.com/questions/343074/directory-junction-vs-directory-symbolic-link">http://superuser.com/questions/343074/directory-junction-vs-directory-symbolic-link</a>
+          </ul>
+        </div>
+      </div>
+      </article>
+      <footer>
+        2015 (c) Antonio Jesús Sánchez Padial
+      </footer>
+    </div> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
