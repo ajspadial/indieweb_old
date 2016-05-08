@@ -1,0 +1,16 @@
+.picture {
+  float: left;
+  height: 75px;
+  vertical-align: bottom;
+  margin-right: 30px;
+}
+
+article .picture {
+  height: 24px;
+  margin-right: 8px;
+}
+
+.header {
+  padding-bottom: 5px;
+  border-bottom: 1px solid;
+}
